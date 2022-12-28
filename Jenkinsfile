@@ -22,8 +22,23 @@ pipeline {
             }
         }
         stage('Terraform Apply') {
+            when {
+                expression {
+                    return input message: 'Do you want to create the infra?', ok: 'Yes'
+                }
+            }
             steps {
                 sh 'terraform apply -auto-approve'
+            }
+        }
+        stage('Terraform Destroy') {
+            when {
+                expression {
+                    return input message: 'Do you want to destroy the infra?', ok: 'Yes'
+                }
+            }
+            steps {
+                sh 'terraform destroy -auto-approve'
             }
         }
     }
