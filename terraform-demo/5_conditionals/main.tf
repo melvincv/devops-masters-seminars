@@ -56,24 +56,24 @@ resource "aws_instance" "webserver-dev" {
   instance_type = "t3.nano"
   key_name = "tdemo1"
   vpc_security_group_ids = [aws_security_group.tdemo-sg.id]
-  count = var.istest == true ? 0 : 1
+  count = var.istest == true ? 1 : 0
 
   tags = {
-    Name = "Web Server"
+    Name = "Dev Web Server"
     Env = "dev"
     Project = "demo"
   }
 }
 
-resource "aws_instance" "webserver-stg" {
+resource "aws_instance" "webserver-prod" {
   ami           = "ami-09d3b3274b6c5d4aa"
   instance_type = "t3.micro"
   key_name = "tdemo1"
   vpc_security_group_ids = [aws_security_group.tdemo-sg.id]
-  count = var.istest == true ? 1 : 0
+  count = var.istest == true ? 0 : 1
 
   tags = {
-    Name = "Web Server"
+    Name = "Prod Web Server"
     Env = "dev"
     Project = "demo"
   }
