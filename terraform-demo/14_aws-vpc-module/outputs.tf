@@ -1,4 +1,4 @@
-output "public_subnets" {
+output "vpc_public_subnets" {
   value = module.vpc.public_subnets
 }
 
